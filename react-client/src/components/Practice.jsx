@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const Practice = () => {
   const [phrases, setPhrases] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [showTranslation, setShowTranslation] = useState(false); // 👈 ajout
+  const [showTranslation, setShowTranslation] = useState(false); 
 
   useEffect(() => {
     fetch('/api/phrases')

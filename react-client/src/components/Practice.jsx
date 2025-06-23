@@ -20,7 +20,7 @@ const Practice = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex < phrases.length - 1 ? prevIndex + 1 : 0
     );
-    setShowTranslation(false); // 👈 cacher à chaque nouvelle phrase
+    setShowTranslation(false); 
   };
 
   const toggleTranslation = () => {

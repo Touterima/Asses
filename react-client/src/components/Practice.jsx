@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 const Practice = () => {
   const [phrases, setPhrases] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showTranslation, setShowTranslation] = useState(false); // 👈 ajout
 
   useEffect(() => {
     fetch('/api/phrases')
@@ -17,8 +18,13 @@ const Practice = () => {
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex < phrases.length - 1 ? prevIndex + 1 : 0 
+      prevIndex < phrases.length - 1 ? prevIndex + 1 : 0
     );
+    setShowTranslation(false); // 👈 cacher à chaque nouvelle phrase
+  };
+
+  const toggleTranslation = () => {
+    setShowTranslation((prev) => !prev);
   };
 
   const currentPhrase = phrases[currentIndex];
@@ -30,7 +36,15 @@ const Practice = () => {
         <div className="card">
           <div className="card-kor">{currentPhrase.kor}</div>
           <div className="card-rom">{currentPhrase.rom}</div>
-          <div className="card-eng">{currentPhrase.eng}</div>
+
+          <div
+            className="card-eng"
+            onClick={toggleTranslation}
+            style={{ cursor: 'pointer', fontWeight: 'bold' }}
+          >
+            {showTranslation ? currentPhrase.eng : 'Reveal Translation'}
+          </div>
+
           <button onClick={handleNext}>Not yet</button>
           <button onClick={handleNext}>Almost</button>
           <button onClick={handleNext}>Got it</button>

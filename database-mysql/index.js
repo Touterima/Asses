@@ -14,6 +14,17 @@ const getAllPhrases = function(callback) {
   });
 };
 
+const updatePhrase = function (id, status, callback) {
+  const query = 'UPDATE phrases SET status = ? WHERE id = ?';
+  connection.query(query, [status, id], (err, results) => {
+    if (err) {
+      return callback(err);
+    }
+    callback(null, results);
+  });
+};
+
 module.exports = {
-  getAllPhrases
+  getAllPhrases,
+  updatePhrase
 };

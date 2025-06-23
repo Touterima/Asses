@@ -28,6 +28,21 @@ app.get('/api/phrases', (req, res) => {
 
 //TODO - add additional route handlers as necessary
 
+app.patch('/api/phrases/:id', (req, res) => {
+  const phraseId = req.params.id;
+  const { status } = req.body;
+
+  db.updatePhrase(phraseId, status, (err, result) => {
+    if (err) {
+      console.error('Erreur lors de la mise à jour du statut :', err);
+      res.status(500).send(err);
+    } else {
+      res.status(200).send('Statut mis à jour');
+    }
+  });
+});
+
+
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });

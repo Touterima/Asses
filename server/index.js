@@ -42,6 +42,17 @@ app.patch('/api/phrases/:id', (req, res) => {
   });
 });
 
+app.post('/api/phrases', (req, res) => {
+  const phrase = req.body;
+  db.addPhrase(phrase, (err, result) => {
+    if (err) {
+      console.error('Erreur lors de l’ajout de la phrase :', err);
+      return res.status(500).send(err);
+    }
+    res.status(201).json({ message: 'Phrase ajoutée', id: result.insertId });
+  });
+});
+
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
